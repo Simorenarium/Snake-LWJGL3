@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = 'rune'
+version = '1.0.0-release.1'
+group = 'de.vertices'
+
+repositories {
+    flatDir { dirs "${rootProject.projectDir}/libs" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    options.fork = true;
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+jar {
+    from "LICENSE"
+}
+
+build {
+    jar.from {
+        jar.duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+        configurations.runtimeClasspath.collect {
+            String libFolder = buildDir.toString();
+            libFolder = libFolder.substring(0, libFolder.length() - (new String("build").length() + 1))
+            libFolder += "\\libs";
+        }
+    }
+}

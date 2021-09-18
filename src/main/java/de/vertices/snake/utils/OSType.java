@@ -1,4 +1,4 @@
-package utils;
+package de.vertices.snake.utils;
 
 public enum OSType {
 

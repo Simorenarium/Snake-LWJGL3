@@ -1,4 +1,5 @@
-import utils.OSType;
+import de.vertices.snake.Snake;
+import de.vertices.snake.utils.OSType;
 
 public final class Start {
     static {
@@ -21,6 +22,6 @@ public final class Start {
     }
 
     public static void main(final String... args) {
-        System.out.println(OSType.getCurrentOS());
+        Snake.getInstance().run();
     }
 }

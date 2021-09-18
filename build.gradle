@@ -38,6 +38,9 @@ build {
             String libFolder = buildDir.toString();
             libFolder = libFolder.substring(0, libFolder.length() - (new String("build").length() + 1))
             libFolder += "\\libs";
+            if (it.toString().startsWith(libFolder)) {
+                zipTree(it)
+            }
         }
     }
 }
